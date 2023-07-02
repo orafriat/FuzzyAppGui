@@ -12,8 +12,6 @@ public class Globals {
     public static String firstFilePath;
     public static DefaultListModel<String> listModel1 = new DefaultListModel<>();
 
-
-
     public static List<List<String>> file2;
     public static JList<String> ListFile2;
     public static String secondFilePath;

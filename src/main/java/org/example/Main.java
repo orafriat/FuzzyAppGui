@@ -15,20 +15,20 @@ public class Main {
     }
 
     private static void createGUI() {
-        FirstFileFrame firstFileFrame = new FirstFileFrame();
+        JFrame mainFrame = new JFrame("Main Frame");
+        FirstFileFrame firstFileFrame = new FirstFileFrame(mainFrame);
         JPanel root = firstFileFrame.getFirstRootPanel();
-        JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setContentPane(root);
-        frame.pack();
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.setContentPane(root);
+        mainFrame.pack();
 
         // Set the desired size of the frame
         int width = 600;  // Adjust to your preferred width
         int height = 400; // Adjust to your preferred height
-        frame.setSize(width, height);
+        mainFrame.setSize(width, height);
 
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+        mainFrame.setLocationRelativeTo(null);
+        mainFrame.setVisible(true);
 
     }
 

@@ -18,14 +18,20 @@ public class FirstFileFrame implements ActionListener {
     private JButton browseFirstFile;
     private JButton submitFirstFile;
     private JPanel firstRootPanel;
+    private JLabel File_Name;
+
+    private SecondFileFrame secondFileFrame;
+    private JFrame mainFrame; // Reference to the main JFrame
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
     }
 
-    public FirstFileFrame() {
+    public FirstFileFrame(JFrame mainFrame) {
+        this.mainFrame = mainFrame;
         browseFirstFile.addActionListener(this);
         submitFirstFile.addActionListener(this);
+
     }
 
     public JPanel getFirstRootPanel() {
@@ -35,6 +41,11 @@ public class FirstFileFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Next")) {
+            secondFileFrame = new SecondFileFrame(mainFrame);
+            JPanel secondRoot = secondFileFrame.getSecondRootPanel();
+
+            mainFrame.setContentPane(secondRoot); // Set secondRoot as the content pane
+            mainFrame.revalidate(); // Revalidate the mainFrame to update the UI
 
 
         } else {
@@ -58,8 +69,10 @@ public class FirstFileFrame implements ActionListener {
                     String[] path = Globals.firstFilePath.trim().split("\\\\");
                     String fileName = path[path.length - 1];
 
-                    if (e.getActionCommand().equals("Browse First File")) {
-                        browseFirstFile.setText(fileName);
+                    if (e.getActionCommand().equals("Browse...")) {
+                        File_Name.setText(fileName);
+                        System.out.println(fileName);
+
                         if (selectedFile.getName().endsWith(".xlsx") || selectedFile.getName().endsWith(".xls")) {
                             Globals.file1 = Utilities.readExcelFile(filePath);
                         } else if (selectedFile.getName().endsWith(".csv")) {
@@ -72,7 +85,6 @@ public class FirstFileFrame implements ActionListener {
                             Globals.listModel3.addElement("Table 1- "+item);
                         }
                         Globals.ListFile1.setModel(Globals.listModel1);
-                        Globals.Combained_List.setModel(Globals.listModel1);
                     }
 
                 } catch (IOException ex) {

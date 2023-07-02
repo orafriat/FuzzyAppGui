@@ -1,5 +1,6 @@
 package org.example;
 
+import org.apache.logging.log4j.core.util.JsonUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -14,16 +15,23 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class SecondFileFrame implements ActionListener {
+public class SecondFileFrame extends JPanel implements ActionListener {
     private JButton browseSecondFile;
     private JButton submitSecondFile;
     private JPanel secondRootPanel;
+    private JLabel File2_Name;
+
+    private UserSelectionFrame thirdFileFrame;
+    private JFrame mainFrame; // Reference to the main JFrame
+
+
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
     }
 
-    public SecondFileFrame() {
+    public SecondFileFrame(JFrame mainFrame) {
+        this.mainFrame = mainFrame;
         browseSecondFile.addActionListener(this);
         submitSecondFile.addActionListener(this);
     }
@@ -36,6 +44,11 @@ public class SecondFileFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Next")) {
 
+            UserSelectionFrame userSelectionFrame = new UserSelectionFrame(mainFrame);
+            JPanel thirdRoot = userSelectionFrame.getThirdRootPanel();
+
+            mainFrame.setContentPane(thirdRoot); // Set secondRoot as the content pane
+            mainFrame.revalidate(); // Revalidate the mainFrame to update the UI
 
         } else {
             JFileChooser fileChooser = new JFileChooser();
@@ -58,8 +71,9 @@ public class SecondFileFrame implements ActionListener {
                     String[] path = Globals.secondFilePath.trim().split("\\\\");
                     String fileName = path[path.length - 1];
 
-                    if (e.getActionCommand().equals("Browse Second File")) {
-                        browseSecondFile.setText(fileName);
+                    if (e.getActionCommand().equals("Browse...")) {
+                        File2_Name.setText(fileName);
+                        System.out.println(fileName);
                         if (selectedFile.getName().endsWith(".xlsx") || selectedFile.getName().endsWith(".xls")) {
                             Globals.file2 = Utilities.readExcelFile(filePath);
                         } else if (selectedFile.getName().endsWith(".csv")) {
@@ -69,10 +83,10 @@ public class SecondFileFrame implements ActionListener {
                         List<String> secondList = Globals.file2.get(0);
                         for (String item : secondList) {
                             Globals.listModel2.addElement(item);
-                            Globals.listModel3.addElement("Table 1- "+item);
+                            Globals.listModel3.addElement("Table 2- "+item);
                         }
                         Globals.ListFile2.setModel(Globals.listModel2);
-                        Globals.Combained_List.setModel(Globals.listModel2);
+                        Globals.Combained_List.setModel(Globals.listModel3);
                     }
 
                 } catch (IOException ex) {
