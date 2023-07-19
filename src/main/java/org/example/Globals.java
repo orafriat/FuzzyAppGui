@@ -22,6 +22,14 @@ public class Globals {
     public static JList<String> Combained_List;
     public static DefaultListModel<String> listModel3 = new DefaultListModel<>();
 
+    public static int[] selectedColumnsList1;
+    public static int[] selectedColumnsList2;
+    public static int[] userChoiceList3;
+
+    public static String threshold;
+
+    public static String newFilePath = "newFile.xlsx";
+
 
 
 }
