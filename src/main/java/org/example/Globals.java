@@ -1,7 +1,10 @@
 package org.example;
 
+import com.graphbuilder.curve.NURBSpline;
+
 import javax.swing.*;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Globals {
@@ -25,6 +28,8 @@ public class Globals {
     public static int[] selectedColumnsList1;
     public static int[] selectedColumnsList2;
     public static int[] userChoiceList3;
+    public static List<Integer> combinedList1 = new ArrayList<>();
+    public static List<Integer> combinedList2 = new ArrayList<>();
 
     public static String threshold;
 

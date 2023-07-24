@@ -174,6 +174,7 @@ public class Utilities {
                 cell.setCellValue(cellData);
             }
         }
+        System.out.println("FINISH");
 
         FileOutputStream outputStream = new FileOutputStream(filePath);
         workbook.write(outputStream);
